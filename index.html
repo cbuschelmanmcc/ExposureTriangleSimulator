@@ -1,0 +1,786 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2566">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Exposure Triangle Simulator&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap');</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>* {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-sizing: border-box;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Roboto', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #091727;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #FFFFFF;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 1200px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: rgba(0, 0, 0, 0.3);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>h1 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.lighting-section {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 3rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.lighting-label {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.125rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #F9A826;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.lighting-controls {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.lighting-display {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-width: 5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0.5rem 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: rgba(249, 168, 38, 0.13);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.lighting-value {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #F9A826;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.lighting-stops {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.875rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0.8;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.lighting-labels {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 0.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.875rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.lighting-labels div {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.triangle-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.controls-grid {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>grid-template-columns: repeat(3, 1fr);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 3rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.control-group {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.control-label {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.125rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.control-range {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.control-range input {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #333;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.control-range input::-webkit-slider-thumb {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>appearance: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.control-range input::-moz-range-thumb {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.control-labels {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.875rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.control-value {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.settings-display {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 3rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.settings-grid {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>grid-template-columns: repeat(4, 1fr);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.setting-card {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.setting-visual {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 6rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 6rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.setting-visual-content {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.setting-main-value {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.setting-sub-value {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.875rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0.8;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.setting-description {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.875rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.buttons {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.button {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0.75rem 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: background-color 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.button-primary {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #2563eb;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.button-primary:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #1d4ed8;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.button-secondary {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #4b5563;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.button-secondary:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #374151;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.light-meter {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.light-meter h3 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.125rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.light-meter-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.light-meter-display {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 32rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #374151;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.meter-scale-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 4rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.meter-scale {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: rgba(0, 0, 0, 0.3);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.meter-scale span {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.875rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.meter-needle {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 3rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #049CD9;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.meter-center-line {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 0.125rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateX(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.exposure-reading {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #049CD9;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.exposure-reading p {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.feedback {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.feedback.success {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: rgba(4, 156, 217, 0.2);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.feedback.failure {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: rgba(249, 168, 38, 0.2);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.feedback p {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.125rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.feedback-tips {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.875rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0.8;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.feedback-tips p {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.educational-info {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 3rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.875rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0.8;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.educational-info h3 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.educational-info ul {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>list-style-type: disc;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding-left: 1.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.educational-info li {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 0.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.copyright {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: right;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.875rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0.6;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Color variables applied */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.shutter-speed { color: #25C3ED; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.aperture { color: #D393C1; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.iso { color: #EAEAEA; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.lighting { color: #F9A826; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>input[type="range"].shutter-speed::-webkit-slider-thumb { background-color: #25C3ED; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>input[type="range"].aperture::-webkit-slider-thumb { background-color: #D393C1; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>input[type="range"].iso::-webkit-slider-thumb { background-color: #EAEAEA; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>input[type="range"].lighting::-webkit-slider-thumb { background-color: #F9A826; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>input[type="range"].shutter-speed::-moz-range-thumb { background-color: #25C3ED; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>input[type="range"].aperture::-moz-range-thumb { background-color: #D393C1; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>input[type="range"].iso::-moz-range-thumb { background-color: #EAEAEA; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>input[type="range"].lighting::-moz-range-thumb { background-color: #F9A826; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 768px) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.controls-grid {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>grid-template-columns: 1fr;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>.settings-grid {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>grid-template-columns: repeat(2, 1fr);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 480px) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.settings-grid {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>grid-template-columns: 1fr;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;The Exposure Triangle&lt;/h1&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Lighting Condition Slider --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="lighting-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="lighting-label"&gt;Lighting Condition&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="lighting-controls"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;input type="range" min="0" max="4" value="2" id="lightingSlider" class="lighting" style="flex-grow: 1;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="lighting-display"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="lighting-value" id="lightingValue"&gt;Shade&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="lighting-stops" id="lightingStops"&gt;-2 stops&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="lighting-labels"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div&gt;Night&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div&gt;Indoors&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div&gt;Shade&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div&gt;Overcast&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div&gt;Daylight&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Triangle Visualization --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="triangle-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;svg viewBox="0 0 300 280" width="300" height="280"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Triangle --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;polygon points="150,10 10,250 290,250" fill="none" stroke="white" stroke-width="2"/&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Lighting condition indicator --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;circle cx="150" cy="40" r="15" fill="#F9A826" opacity="0.6"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;text x="150" y="45" text-anchor="middle" fill="white" font-size="10" font-family="Roboto" id="triangleLighting"&gt;Shade&lt;/text&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Rotated labels --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;text transform="translate(230, 120) rotate(62)" text-anchor="start" fill="#25C3ED" font-family="Roboto"&gt;Shutter Speed&lt;/text&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;text transform="translate(70, 120) rotate(-62)" text-anchor="end" fill="#D393C1" font-family="Roboto"&gt;Aperture&lt;/text&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;text x="150" y="275" text-anchor="middle" fill="#EAEAEA" font-family="Roboto"&gt;ISO&lt;/text&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Current settings indicator --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;circle cx="150" cy="130" r="12" fill="white" id="settingsIndicator"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Controls --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="controls-grid"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Shutter Speed --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="control-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="control-label shutter-speed"&gt;Shutter Speed&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="control-range"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="range" min="0" max="7" value="3" id="shutterSlider" class="shutter-speed"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="control-labels"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Slower (1/8)&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Faster (1/1000)&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="control-value shutter-speed" id="shutterValue"&gt;1/60&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Aperture --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="control-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="control-label aperture"&gt;Aperture&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="control-range"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="range" min="0" max="7" value="3" id="apertureSlider" class="aperture"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="control-labels"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Narrow (f16)&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Wide (f1.4)&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="control-value aperture" id="apertureValue"&gt;f5.6&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- ISO --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="control-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="control-label iso"&gt;ISO&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="control-range"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="range" min="0" max="7" value="2" id="isoSlider" class="iso"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="control-labels"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Low (100)&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;High (12800)&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="control-value iso" id="isoValue"&gt;400&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Settings Display --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="settings-display"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="settings-grid"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Lighting --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="setting-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="setting-visual" style="background-color: rgba(249, 168, 38, 0.13);"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="setting-visual-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="setting-main-value lighting" id="displayLighting"&gt;Shade&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="setting-sub-value" id="displayLightingStops"&gt;-2 stops&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="setting-description lighting"&gt;Ambient Light&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Shutter Speed --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="setting-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="setting-visual" style="background-color: rgba(37, 195, 237, 0.13);"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="setting-visual-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="setting-main-value shutter-speed" id="displayShutter"&gt;1/60&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="setting-sub-value" id="displayShutterEffect"&gt;Balanced&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="setting-description shutter-speed"&gt;Controls motion blur&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Aperture --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="setting-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="setting-visual" style="background-color: rgba(211, 147, 193, 0.13);"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="setting-visual-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="setting-main-value aperture" id="displayAperture"&gt;f5.6&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="setting-sub-value" id="displayApertureEffect"&gt;Balanced&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="setting-description aperture"&gt;Controls depth of field&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- ISO --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="setting-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="setting-visual" style="background-color: rgba(234, 234, 234, 0.13);"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="setting-visual-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="setting-main-value iso" id="displayISO"&gt;400&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="setting-sub-value" id="displayISOEffect"&gt;Balanced&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="setting-description iso"&gt;Controls noise level&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Buttons --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="buttons"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="button button-primary" id="checkButton"&gt;Check Exposure&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="button button-secondary" id="resetButton"&gt;Reset&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Light Meter --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="light-meter"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;Light Meter&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="light-meter-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="light-meter-display"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="meter-scale-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="meter-scale"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span&gt;-2&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span&gt;-1&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span&gt;0&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span&gt;+1&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span&gt;+2&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="meter-needle" id="meterNeedle"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="meter-center-line"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="exposure-reading"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p id="exposureReading"&gt;Perfect Exposure&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Feedback --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="feedback" id="feedback" style="display: none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p id="feedbackText"&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="feedback-tips" id="feedbackTips"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Educational Info --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="educational-info"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;How to balance exposure:&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;li&gt;&lt;span class="lighting"&gt;Lighting conditions&lt;/span&gt; dramatically affect how much light is available&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;li&gt;&lt;span class="shutter-speed"&gt;Faster shutter speeds&lt;/span&gt; reduce light but freeze motion&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;li&gt;&lt;span class="aperture"&gt;Wider apertures&lt;/span&gt; (smaller f-numbers) increase light but reduce depth of field&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;li&gt;&lt;span class="iso"&gt;Higher ISO&lt;/span&gt; increases light sensitivity but introduces noise&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Copyright --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="copyright"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>© Christopher Buschelman 2025</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Values for each setting</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const shutterSpeeds = ["1/8", "1/15", "1/30", "1/60", "1/125", "1/250", "1/500", "1/1000"];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const apertures = ["f16", "f11", "f8", "f5.6", "f4", "f2.8", "f2", "f1.4"];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const isoValues = ["100", "200", "400", "800", "1600", "3200", "6400", "12800"];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const lightingConditions = ["Night", "Indoors", "Shade", "Overcast", "Daylight"];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const lightingStops = [-4, -3, -2, 3, 4];</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// State variables</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let shutterSpeedIdx = 3;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let apertureIdx = 3;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let isoIdx = 2;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let lightingIdx = 2;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let hasSubmitted = false;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Get DOM elements</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const shutterSlider = document.getElementById('shutterSlider');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const apertureSlider = document.getElementById('apertureSlider');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const isoSlider = document.getElementById('isoSlider');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const lightingSlider = document.getElementById('lightingSlider');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const checkButton = document.getElementById('checkButton');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const resetButton = document.getElementById('resetButton');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const feedback = document.getElementById('feedback');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const meterNeedle = document.getElementById('meterNeedle');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const settingsIndicator = document.getElementById('settingsIndicator');</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Calculate exposure value</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function calculateExposureValue() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return (7 - shutterSpeedIdx) + apertureIdx + isoIdx + lightingStops[lightingIdx];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Calculate exposure stops</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function calculateExposureStops() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const ev = calculateExposureValue();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const stops = ev - 10;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return Math.min(Math.max(stops, -2), 2);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Check if exposure is correct</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function isExposureCorrect() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const ev = calculateExposureValue();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return ev &gt;= 9 &amp;&amp; ev &lt;= 11;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Generate feedback</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function generateFeedback() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (isExposureCorrect()) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return "Perfect exposure! Your settings are well balanced.";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const ev = calculateExposureValue();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const stops = calculateExposureStops();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (ev &lt; 9) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return `Your image would be underexposed by approximately ${Math.abs(stops).toFixed(1)} stops. Try using a slower shutter speed, wider aperture (smaller f-number), or higher ISO.`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return `Your image would be overexposed by approximately ${Math.abs(stops).toFixed(1)} stops. Try using a faster shutter speed, narrower aperture (larger f-number), or lower ISO.`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Update all displays</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateDisplays() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Update slider values</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('shutterValue').textContent = shutterSpeeds[shutterSpeedIdx];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('apertureValue').textContent = apertures[apertureIdx];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('isoValue').textContent = isoValues[isoIdx];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('lightingValue').textContent = lightingConditions[lightingIdx];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('lightingStops').textContent = lightingStops[lightingIdx] &gt; 0 ? `+${lightingStops[lightingIdx]} stops` : `${lightingStops[lightingIdx]} stops`;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Update display cards</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('displayShutter').textContent = shutterSpeeds[shutterSpeedIdx];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('displayAperture').textContent = apertures[apertureIdx];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('displayISO').textContent = isoValues[isoIdx];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('displayLighting').textContent = lightingConditions[lightingIdx];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('displayLightingStops').textContent = lightingStops[lightingIdx] &gt; 0 ? `+${lightingStops[lightingIdx]} stops` : `${lightingStops[lightingIdx]} stops`;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Update effect descriptions</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('displayShutterEffect').textContent = shutterSpeedIdx &lt; 3 ? "More light" : shutterSpeedIdx &gt; 3 ? "Less light" : "Balanced";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('displayApertureEffect').textContent = apertureIdx &lt; 3 ? "Less light" : apertureIdx &gt; 3 ? "More light" : "Balanced";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('displayISOEffect').textContent = isoIdx &lt; 3 ? "Less light" : isoIdx &gt; 3 ? "More light" : "Balanced";</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Update triangle</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('triangleLighting').textContent = lightingConditions[lightingIdx];</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Update settings indicator</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const correct = isExposureCorrect();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>settingsIndicator.style.fill = hasSubmitted ? (correct ? "#049CD9" : "#F9A826") : "white";</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Update light meter</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const exposureStops = calculateExposureStops();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const needlePosition = 50 + (exposureStops * 25);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>meterNeedle.style.left = `calc(${needlePosition}% - 0.25rem)`;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Update exposure reading</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const exposureReading = document.getElementById('exposureReading');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (exposureStops === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>exposureReading.innerHTML = '&lt;p&gt;Perfect Exposure&lt;/p&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (exposureStops &lt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>exposureReading.innerHTML = `&lt;p&gt;Underexposed by ${Math.abs(exposureStops).toFixed(1)} stops&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>exposureReading.innerHTML = `&lt;p&gt;Overexposed by ${exposureStops.toFixed(1)} stops&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Update feedback if submitted</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (hasSubmitted) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const feedbackText = generateFeedback();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const correct = isExposureCorrect();</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>feedback.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>feedback.className = `feedback ${correct ? 'success' : 'failure'}`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('feedbackText').textContent = feedbackText;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Add tips for incorrect exposure</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const feedbackTips = document.getElementById('feedbackTips');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (!correct) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let tips = `</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;Try adjusting your settings to achieve a balanced exposure.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;Remember: When one setting lets in more light, you may need to adjust the others to compensate.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>`;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (lightingIdx === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tips += '&lt;p&gt;In &lt;strong&gt;Night&lt;/strong&gt; conditions, you\'ll need slower shutter speeds, wider apertures, or higher ISO to compensate for the lack of light.&lt;/p&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else if (lightingIdx === 1) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tips += '&lt;p&gt;In &lt;strong&gt;Indoors&lt;/strong&gt; conditions, you\'ll likely need slower shutter speeds or wider apertures to get enough light.&lt;/p&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else if (lightingIdx === 3) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tips += '&lt;p&gt;In &lt;strong&gt;Overcast&lt;/strong&gt; conditions, you\'ll need faster shutter speeds or narrower apertures to prevent overexposure.&lt;/p&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else if (lightingIdx === 4) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tips += '&lt;p&gt;In bright &lt;strong&gt;Daylight&lt;/strong&gt;, you\'ll need faster shutter speeds, narrower apertures, or lower ISO to avoid overexposure.&lt;/p&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>feedbackTips.innerHTML = tips;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>feedbackTips.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Event listeners</p>
+<p class="p1"><span class="Apple-converted-space">        </span>shutterSlider.addEventListener('input', (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>shutterSpeedIdx = parseInt(e.target.value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateDisplays();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>apertureSlider.addEventListener('input', (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>apertureIdx = parseInt(e.target.value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateDisplays();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>isoSlider.addEventListener('input', (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>isoIdx = parseInt(e.target.value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateDisplays();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>lightingSlider.addEventListener('input', (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>lightingIdx = parseInt(e.target.value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateDisplays();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>checkButton.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>hasSubmitted = true;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateDisplays();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>resetButton.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>hasSubmitted = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>feedback.style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>shutterSpeedIdx = 3;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>apertureIdx = 3;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>isoIdx = 2;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>lightingIdx = 2;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>shutterSlider.value = 3;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>apertureSlider.value = 3;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>isoSlider.value = 2;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>lightingSlider.value = 2;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateDisplays();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Initial update</p>
+<p class="p1"><span class="Apple-converted-space">        </span>updateDisplays();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
